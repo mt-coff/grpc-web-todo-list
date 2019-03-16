@@ -1,0 +1,27 @@
+{
+  "name": "grpc-web-todo-list",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "mt_coff",
+  "license": "MIT",
+  "scripts": {
+    "dev": "parcel serve -p 3000 src/index.html",
+    "fmt": "prettier --config .prettierrc --write 'src/**'"
+  },
+  "private": true,
+  "devDependencies": {
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.2",
+    "parcel-bundler": "^1.12.2",
+    "prettier": "^1.16.4",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "@types/react-redux": "^7.0.3",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  }
+}

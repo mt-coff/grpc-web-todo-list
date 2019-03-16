@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package todoList;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/Empty.proto";
+
+service TodoListService {
+  rpc GetTodoList(google.protobuf.Empty) returns (TodoListResponse);
+
+  rpc GetTodo(GetTodoRequest) returns (Todo);
+
+  rpc AddTodo(AddTodoRequest) returns(Todo);
+}
+
+message TodoListResponse {
+  repeated Todo todo = 1;
+}
+
+message Todo {
+  string id = 1;
+  string title = 2;
+  string detail = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+  google.protobuf.Timestamp deadline = 6;
+}
+
+message GetTodoRequest{
+  string id = 1;
+}
+
+message AddTodoRequest {
+  string title = 1;
+  string detail = 2;
+  google.protobuf.Timestamp deadline = 3;
+}
