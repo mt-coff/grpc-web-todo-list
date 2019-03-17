@@ -10,7 +10,6 @@
 import * as grpcWeb from 'grpc-web';
 import {
   Empty,
-  Timestamp,
   AddTodoRequest,
   GetTodoRequest,
   Todo,

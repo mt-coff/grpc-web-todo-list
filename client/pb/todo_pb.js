@@ -11,7 +11,6 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 var google_protobuf_Empty_pb = require('google-protobuf/google/protobuf/Empty_pb.js');
 goog.exportSymbol('proto.todoList.AddTodoRequest', null, global);
 goog.exportSymbol('proto.todoList.GetTodoRequest', null, global);
@@ -234,10 +233,7 @@ proto.todoList.Todo.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     title: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    detail: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    deadline: (f = msg.getDeadline()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+    detail: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -285,21 +281,6 @@ proto.todoList.Todo.deserializeBinaryFromReader = function(msg, reader) {
     case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setDetail(value);
-      break;
-    case 4:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setCreatedAt(value);
-      break;
-    case 5:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setUpdatedAt(value);
-      break;
-    case 6:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setDeadline(value);
       break;
     default:
       reader.skipField();
@@ -351,30 +332,6 @@ proto.todoList.Todo.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getCreatedAt();
-  if (f != null) {
-    writer.writeMessage(
-      4,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
-  f = message.getUpdatedAt();
-  if (f != null) {
-    writer.writeMessage(
-      5,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
-  f = message.getDeadline();
-  if (f != null) {
-    writer.writeMessage(
-      6,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
 };
 
 
@@ -420,96 +377,6 @@ proto.todoList.Todo.prototype.getDetail = function() {
 /** @param {string} value */
 proto.todoList.Todo.prototype.setDetail = function(value) {
   jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional google.protobuf.Timestamp created_at = 4;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.todoList.Todo.prototype.getCreatedAt = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 4));
-};
-
-
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
-proto.todoList.Todo.prototype.setCreatedAt = function(value) {
-  jspb.Message.setWrapperField(this, 4, value);
-};
-
-
-proto.todoList.Todo.prototype.clearCreatedAt = function() {
-  this.setCreatedAt(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.todoList.Todo.prototype.hasCreatedAt = function() {
-  return jspb.Message.getField(this, 4) != null;
-};
-
-
-/**
- * optional google.protobuf.Timestamp updated_at = 5;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.todoList.Todo.prototype.getUpdatedAt = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 5));
-};
-
-
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
-proto.todoList.Todo.prototype.setUpdatedAt = function(value) {
-  jspb.Message.setWrapperField(this, 5, value);
-};
-
-
-proto.todoList.Todo.prototype.clearUpdatedAt = function() {
-  this.setUpdatedAt(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.todoList.Todo.prototype.hasUpdatedAt = function() {
-  return jspb.Message.getField(this, 5) != null;
-};
-
-
-/**
- * optional google.protobuf.Timestamp deadline = 6;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.todoList.Todo.prototype.getDeadline = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 6));
-};
-
-
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
-proto.todoList.Todo.prototype.setDeadline = function(value) {
-  jspb.Message.setWrapperField(this, 6, value);
-};
-
-
-proto.todoList.Todo.prototype.clearDeadline = function() {
-  this.setDeadline(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.todoList.Todo.prototype.hasDeadline = function() {
-  return jspb.Message.getField(this, 6) != null;
 };
 
 
@@ -703,8 +570,7 @@ proto.todoList.AddTodoRequest.prototype.toObject = function(opt_includeInstance)
 proto.todoList.AddTodoRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     title: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    detail: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    deadline: (f = msg.getDeadline()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
+    detail: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -749,11 +615,6 @@ proto.todoList.AddTodoRequest.deserializeBinaryFromReader = function(msg, reader
       var value = /** @type {string} */ (reader.readString());
       msg.setDetail(value);
       break;
-    case 3:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setDeadline(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -797,14 +658,6 @@ proto.todoList.AddTodoRequest.serializeBinaryToWriter = function(message, writer
       f
     );
   }
-  f = message.getDeadline();
-  if (f != null) {
-    writer.writeMessage(
-      3,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
 };
 
 
@@ -835,36 +688,6 @@ proto.todoList.AddTodoRequest.prototype.getDetail = function() {
 /** @param {string} value */
 proto.todoList.AddTodoRequest.prototype.setDetail = function(value) {
   jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional google.protobuf.Timestamp deadline = 3;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.todoList.AddTodoRequest.prototype.getDeadline = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
-};
-
-
-/** @param {?proto.google.protobuf.Timestamp|undefined} value */
-proto.todoList.AddTodoRequest.prototype.setDeadline = function(value) {
-  jspb.Message.setWrapperField(this, 3, value);
-};
-
-
-proto.todoList.AddTodoRequest.prototype.clearDeadline = function() {
-  this.setDeadline(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.todoList.AddTodoRequest.prototype.hasDeadline = function() {
-  return jspb.Message.getField(this, 3) != null;
 };
 
 
