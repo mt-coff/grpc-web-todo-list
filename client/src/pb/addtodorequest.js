@@ -6,7 +6,7 @@
  * @public
  */
 // GENERATED CODE -- DO NOT EDIT!
-
+/* eslint-disable */
 goog.provide('proto.todoList.AddTodoRequest');
 
 goog.require('jspb.BinaryReader');
