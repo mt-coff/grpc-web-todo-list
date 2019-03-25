@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 interface IProps {
   todoList: any;
@@ -12,16 +13,33 @@ export default class TodoList extends React.Component<IProps> {
 
   render() {
     return (
-      <ul>
+      <Ul>
         {this.props.todoList.map((todo: any) => {
           return (
-            <li key={todo.id}>
-              <div>{todo.title}</div>
-              <div>{todo.detail}</div>
-            </li>
+            <Li key={todo.id}>
+              <Div>{todo.title}</Div>
+              <Div>{todo.detail}</Div>
+            </Li>
           );
         })}
-      </ul>
+      </Ul>
     );
   }
 }
+
+const Ul = styled.ul`
+  padding: 0;
+  width: 500px;
+`;
+
+const Li = styled.li`
+  list-style: none;
+  display: flex;
+`;
+
+const Div = styled.div`
+  padding: 0 1rem;
+  margin: 0.5rem 0;
+  width: 200px;
+  border: solid 1px #242424;
+`;
