@@ -28,8 +28,7 @@ export default (state = initialState, action: any) => {
     case RECEIVE_TODO_LIST:
       return Object.assign({}, state, {
         todoList: action.todoList.todoList,
-        isError: false,
-        errorMsg: ''
+        isError: false
       });
     case HANDLE_ERROR:
       return Object.assign({}, state, {

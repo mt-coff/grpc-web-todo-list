@@ -6,7 +6,7 @@ interface IProps {
   addTodo: any;
   getTodos: any;
   isError: boolean;
-  errorMsg: any;
+  errorMsg: string;
 }
 
 class Form extends React.Component<IProps> {
@@ -24,15 +24,15 @@ class Form extends React.Component<IProps> {
   };
 
   registerTodo = (): void => {
-    this.props.addTodo(this.state.title, this.state.detail);
-    if (this.props.isError) {
-      window.alert('アラートは捕まる？');
-      console.log('hgoe');
-      return;
-    }
-    this.props.getTodos();
-    this.setState({ title: '', detail: '' });
-    return;
+    this.props
+      .addTodo(this.state.title, this.state.detail)
+      .then(() => {
+        this.props.getTodos();
+        this.setState({ title: '', detail: '' });
+      })
+      .catch(() => {
+        window.alert(this.props.errorMsg);
+      });
   };
 
   render() {

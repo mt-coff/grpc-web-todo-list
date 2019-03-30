@@ -1,5 +1,7 @@
 import { TodoListServiceClient } from '../pb/TodoServiceClientPb';
 import { AddTodoRequest, Todo, Empty, TodoListResponse } from '../pb/todo_pb';
+import { Dispatch } from 'redux';
+import * as grpcWeb from 'grpc-web';
 
 const client = new TodoListServiceClient('http://localhost:8080', {}, {});
 
@@ -14,19 +16,24 @@ export const receiveAddTodo = (todo: Todo.AsObject) => ({
   todo
 });
 
-export const addTodo = (title: string, detail: string) => (dispatch: any) => {
-  dispatch(requestAddTodo());
+export const addTodo = (title: string, detail: string) => (
+  dispatch: Dispatch
+) => {
+  return new Promise((resolve, reject) => {
+    dispatch(requestAddTodo());
 
-  const newTodo = new AddTodoRequest();
-  newTodo.setTitle(title);
-  newTodo.setDetail(detail);
+    const newTodo = new AddTodoRequest();
+    newTodo.setTitle(title);
+    newTodo.setDetail(detail);
 
-  client.addTodo(newTodo, {}, (err: any, res: Todo) => {
-    if (err) {
-      dispatch(handleError(err.message));
-      return;
-    }
-    dispatch(receiveAddTodo(res.toObject()));
+    client.addTodo(newTodo, {}, (err: grpcWeb.Error, res: Todo) => {
+      if (err) {
+        dispatch(handleError(err.message));
+        return reject();
+      }
+      dispatch(receiveAddTodo(res.toObject()));
+      return resolve();
+    });
   });
 };
 
@@ -41,19 +48,26 @@ export const receiveGetTodoList = (todoList: TodoListResponse.AsObject) => ({
   todoList: todoList
 });
 
-export const getTodos = () => (dispatch: any) => {
-  const empty: Empty = {
-    toObject: () => ({}),
-    serializeBinary: () => new Uint8Array()
-  };
+export const getTodos = () => (dispatch: Dispatch) => {
+  return new Promise((resolve, reject) => {
+    const empty: Empty = {
+      toObject: () => ({}),
+      serializeBinary: () => new Uint8Array()
+    };
 
-  client.getTodoList(empty, {}, (err: any, res: TodoListResponse) => {
-    dispatch(requestGetTodoList());
-    if (err) {
-      dispatch(handleError(err.message));
-      return;
-    }
-    dispatch(receiveGetTodoList(res.toObject()));
+    client.getTodoList(
+      empty,
+      {},
+      (err: grpcWeb.Error, res: TodoListResponse) => {
+        dispatch(requestGetTodoList());
+        if (err) {
+          dispatch(handleError(err.message));
+          return reject();
+        }
+        dispatch(receiveGetTodoList(res.toObject()));
+        return resolve();
+      }
+    );
   });
 };
 
