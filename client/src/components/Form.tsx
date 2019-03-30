@@ -28,7 +28,6 @@ class Form extends React.Component<IProps> {
       .addTodo(this.state.title, this.state.detail)
       .then(() => {
         this.props.getTodos();
-        this.setState({ title: '', detail: '' });
       })
       .catch(() => {
         window.alert(this.props.errorMsg);
